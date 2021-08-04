@@ -1,8 +1,8 @@
-from typing import List, Tuple, Optional, Union
+from pathlib import Path
+from typing import List, Optional, Tuple, Union
 
 import requests
-from pydantic import BaseModel, validator, AnyUrl
-from pathlib import Path
+from pydantic import AnyUrl, BaseModel, validator
 
 
 class FormDataRequest(BaseModel):

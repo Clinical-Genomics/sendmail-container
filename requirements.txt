@@ -6,4 +6,3 @@ email-validator
 pydantic
 pydantic[email]
 requests
-requests_toolbelt
