@@ -13,8 +13,8 @@ ENV EMAIL_HOST="localhost"
 ENV EMAIL_HOST_URI="127.0.0.1"
 
 
-WORKDIR /home/app
-COPY . /home/app
+WORKDIR /home/worker/app
+COPY . /home/worker/app
 
 # Install app requirements
 RUN pip install -r requirements.txt
@@ -27,6 +27,7 @@ CMD gunicorn \
     --bind=$GUNICORN_BIND  \
     --threads=$GUNICORN_THREADS \
     --timeout=$GUNICORN_TIMEOUT \
+    --forwarded-allow-ips="10.0.2.100,127.0.0.1" \
     --log-syslog \
     --access-logfile - \
     --log-level="debug" \
