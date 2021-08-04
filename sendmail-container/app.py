@@ -1,22 +1,20 @@
-import os
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from pathlib import Path
 from smtplib import SMTP
 from typing import List, Optional
 
 from fastapi import FastAPI, File, Form, HTTPException, Response, UploadFile
-from pydantic import NameEmail, BaseModel
+from pydantic import NameEmail, BaseSettings
 from starlette.responses import PlainTextResponse
 
 
-class EnvConfig(BaseModel):
-    email_host: str = os.environ.get("EMAIL_HOST", "localhost")
-    email_host_uri: str = os.environ.get("EMAIL_HOST_URI", "127.0.0.1")
+class EnvConfig(BaseSettings):
+    email_host: str = "localhost"
+    email_host_uri: str = "127.0.0.1"
 
     class Config:
-        env_file = Path(__file__).parent / "config.env"
+        env_file = ".env"
 
 
 envconfig = EnvConfig()
