@@ -13,7 +13,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="sendmail-container",
-    version="0.0.7",
+    version="0.0.8",
     description="API for sending emails with POST request",
     long_description=long_description,
     long_description_content_type="text/markdown",
