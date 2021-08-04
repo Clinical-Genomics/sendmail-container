@@ -12,8 +12,8 @@ from starlette.responses import PlainTextResponse
 
 
 class EnvConfig(BaseModel):
-    email_host: str = "localhost"
-    email_host_uri: str = "127.0.0.1"
+    email_host: str = os.environ.get("EMAIL_HOST", "localhost")
+    email_host_uri: str = os.environ.get("EMAIL_HOST_URI", "127.0.0.1")
 
     class Config:
         env_file = Path(__file__).parent / "config.env"
