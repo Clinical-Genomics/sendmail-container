@@ -18,7 +18,7 @@
 
 ### Review:
 - [ ] Code approved by
-- [ ] Tests executed on stage by:  (Document the test done with screen shots and description.)
+- [ ] Tests executed on stage by:  (Document the test done with screenshots and description.)
 - [ ] "Merge and deploy" approved by
 
 This [version](https://semver.org/) is a:
