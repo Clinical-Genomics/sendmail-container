@@ -2,16 +2,24 @@ import os
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from pathlib import Path
 from smtplib import SMTP
 from typing import List, Optional
 
 from fastapi import FastAPI, File, Form, HTTPException, Response, UploadFile
-from pydantic import NameEmail
+from pydantic import NameEmail, BaseModel
 from starlette.responses import PlainTextResponse
 
-EMAIL_HOST = os.environ.get("EMAIL_HOST") or "localhost"
-EMAIL_HOST_URI = os.environ.get("EMAIL_HOST_URI") or "127.0.0.1"
 
+class EnvConfig(BaseModel):
+    email_host: str = "localhost"
+    email_host_uri: str = "127.0.0.1"
+
+    class Config:
+        env_file = Path(__file__).parent / "config.env"
+
+
+envconfig = EnvConfig()
 app = FastAPI()
 
 
@@ -29,9 +37,9 @@ def sendmail(
     attachments: Optional[List[UploadFile]] = File(None),
 ):
     try:
-        with SMTP(EMAIL_HOST_URI) as server:
+        with SMTP(envconfig.email_host_uri) as server:
             message = MIMEMultipart("mixed")
-            message["From"] = f"{sender_prefix}@{EMAIL_HOST}"
+            message["From"] = f"{sender_prefix}@{envconfig.email_host}"
             message["To"] = ",".join(list(map(lambda x: x.email, recipients)))
             message["Subject"] = mail_title
             if mail_body:
@@ -45,7 +53,7 @@ def sendmail(
                     message.attach(file_attachment)
             server.connect()
             server.sendmail(
-                from_addr=f"{sender_prefix}@{EMAIL_HOST}",
+                from_addr=f"{sender_prefix}@{envconfig.email_host}",
                 to_addrs=list(map(lambda x: x.email, recipients)),
                 msg=message.as_string(),
             )
