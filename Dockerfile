@@ -1,6 +1,6 @@
-FROM python:3.9-slim
+FROM python:3.7-slim
 
-LABEL base_image="python:3.9-slim"
+LABEL base_image="python:3.7-slim"
 LABEL about.home="https://github.com/Clinical-Genomics/sendmail-container"
 
 
@@ -27,7 +27,6 @@ CMD gunicorn \
     --bind=$GUNICORN_BIND  \
     --threads=$GUNICORN_THREADS \
     --timeout=$GUNICORN_TIMEOUT \
-    --forwarded-allow-ips="10.0.2.100,127.0.0.1" \
     --log-syslog \
     --access-logfile - \
     --log-level="debug" \
