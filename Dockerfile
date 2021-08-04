@@ -6,7 +6,7 @@ LABEL about.home="https://github.com/Clinical-Genomics/sendmail-container"
 
 ENV GUNICORN_WORKERS=1
 ENV GUNICORN_THREADS=1
-ENV GUNICORN_BIND="0.0.0.0:25000"
+ENV GUNICORN_BIND="0.0.0.0:8000"
 ENV GUNICORN_TIMEOUT=400
 
 ENV EMAIL_HOST="localhost"
