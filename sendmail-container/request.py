@@ -1,8 +1,12 @@
+import logging
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
 import requests
 from pydantic import AnyUrl, BaseModel, validator
+from requests import HTTPError
+
+LOG = logging.getLogger(__name__)
 
 
 class FormDataRequest(BaseModel):
@@ -34,5 +38,9 @@ class FormDataRequest(BaseModel):
                 multipart_list.append((key, (None, value)))
         return tuple(multipart_list)
 
-    def submit(self) -> requests.Response:
-        return requests.post(url=str(self.request_uri), files=self.get_multipart_form())
+    def submit(self) -> None:
+        response = requests.post(url=str(self.request_uri), files=self.get_multipart_form())
+        if response.ok:
+            LOG.info(f"{response.status_code}: {response.text}")
+        else:
+            raise HTTPError(f"{response.status_code}: {response.text}")
