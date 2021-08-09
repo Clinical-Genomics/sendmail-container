@@ -16,7 +16,7 @@ class FormDataRequest(BaseModel):
     mail_title: Optional[str] = None
     mail_body: Optional[str] = None
 
-    request_uri: AnyUrl
+    request_uri: str
 
     @validator("recipients")
     def recipients_as_list(cls, value) -> List:
