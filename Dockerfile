@@ -31,4 +31,4 @@ CMD gunicorn \
     --access-logfile - \
     --log-level="debug" \
     --worker-class=uvicorn.workers.UvicornWorker \
-    sendmail-container.app:app
+    sendmail_container.app:app
