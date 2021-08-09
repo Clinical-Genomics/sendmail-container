@@ -1,2 +1,2 @@
 __version__ = "0.1.2"
-from request import FormDataRequest
+from .request import FormDataRequest
