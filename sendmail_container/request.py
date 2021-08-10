@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
 import requests
-from pydantic import AnyUrl, BaseModel, validator
+from pydantic import BaseModel, validator
 from requests import HTTPError
 
 LOG = logging.getLogger(__name__)
@@ -15,6 +15,7 @@ class FormDataRequest(BaseModel):
     recipients: Union[str, List]
     mail_title: Optional[str] = None
     mail_body: Optional[str] = None
+    email_server_alias: Optional[str] = None
 
     request_uri: str
 

@@ -29,6 +29,7 @@ def inform_error(request, exc):
 @app.post("/sendmail/")
 def sendmail(
     sender_prefix: Optional[str] = Form("maildaemon"),
+    email_server_alias: Optional[str] = Form(envconfig.email_host),
     recipients: List[NameEmail] = Form(...),
     mail_title: Optional[str] = Form("(Empty Subject)"),
     mail_body: Optional[str] = Form(None),
@@ -37,7 +38,7 @@ def sendmail(
     try:
         with SMTP(envconfig.email_host_uri) as server:
             message = MIMEMultipart("mixed")
-            message["From"] = f"{sender_prefix}@{envconfig.email_host}"
+            message["From"] = f"{sender_prefix}@{email_server_alias}"
             message["To"] = ",".join(list(map(lambda x: x.email, recipients)))
             message["Subject"] = mail_title
             if mail_body:
@@ -51,7 +52,7 @@ def sendmail(
                     message.attach(file_attachment)
             server.connect()
             server.sendmail(
-                from_addr=f"{sender_prefix}@{envconfig.email_host}",
+                from_addr=f"{sender_prefix}@{email_server_alias}",
                 to_addrs=list(map(lambda x: x.email, recipients)),
                 msg=message.as_string(),
             )
