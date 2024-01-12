@@ -3,6 +3,7 @@ uvicorn
 gunicorn
 python-multipart
 email-validator
+pre-commit
 pydantic
 pydantic[email]
 pydantic[dotenv]
