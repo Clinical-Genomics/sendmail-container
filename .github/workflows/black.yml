@@ -6,9 +6,16 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - uses: psf/black@stable
+      - name: Check out git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          black_args: ". --check --line-length 100"
-          
+          python-version: "3.8"
+
+      - name: Set up Black
+        uses: psf/black@stable
+        with:
+          options: ". --check --line-length 100"
+          version: "~=23.11.0"
