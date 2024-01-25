@@ -1,6 +1,5 @@
 from setuptools import find_packages, setup
 
-
 try:
     with open("requirements.txt", "r") as f:
         install_requires = [x.strip() for x in f.readlines()]
@@ -29,5 +28,5 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.11",
 )
