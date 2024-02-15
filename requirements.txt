@@ -7,4 +7,5 @@ pre-commit
 pydantic
 pydantic[email]
 pydantic[dotenv]
+pydantic-settings
 requests
