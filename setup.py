@@ -1,6 +1,5 @@
 from setuptools import find_packages, setup
 
-
 try:
     with open("requirements.txt", "r") as f:
         install_requires = [x.strip() for x in f.readlines()]
@@ -13,7 +12,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="sendmail-container",
-    version="0.2.1",
+    version="0.2.2",
     description="API for sending emails with POST request",
     long_description=long_description,
     long_description_content_type="text/markdown",
