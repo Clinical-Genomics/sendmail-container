@@ -5,7 +5,9 @@ from smtplib import SMTP
 from typing import List, Optional
 
 from fastapi import FastAPI, File, Form, HTTPException, Response, UploadFile
-from pydantic import NameEmail, BaseSettings
+from pydantic import NameEmail
+from pydantic_settings import BaseSettings
+
 from starlette.responses import PlainTextResponse
 
 
