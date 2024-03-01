@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import List, Optional, Tuple, Annotated
+from typing import Annotated, List, Optional, Tuple
 
 import requests
 from pydantic import BaseModel, BeforeValidator
@@ -36,7 +36,9 @@ class FormDataRequest(BaseModel):
         return tuple(multipart_list)
 
     def submit(self) -> Response:
-        response: Response = requests.post(url=str(self.request_uri), files=self.get_multipart_form())
+        response: Response = requests.post(
+            url=str(self.request_uri), files=self.get_multipart_form()
+        )
         if response.ok:
             LOG.info(f"{response.status_code}: {response.text}")
         else:

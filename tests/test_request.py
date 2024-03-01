@@ -14,7 +14,8 @@ def test_request_one_recipients():
         recipients=recipient,
         mail_title="Title",
         mail_body="Body",
-        request_uri="http://localhost:8000/sendmail/", )
+        request_uri="http://localhost:8000/sendmail/",
+    )
 
     # THEN the recipient field should be a list with a single recipient
     assert request.recipients == [recipient]
@@ -32,7 +33,8 @@ def test_request_multiple_recipients_in_list():
         recipients=recipients,
         mail_title="Title",
         mail_body="Body",
-        request_uri="http://localhost:8000/sendmail/", )
+        request_uri="http://localhost:8000/sendmail/",
+    )
 
     # THEN the recipient field should be a list with both recipients
     assert request.recipients == recipients
@@ -50,7 +52,8 @@ def test_request_multiple_recipients_in_string():
         recipients=recipients,
         mail_title="Title",
         mail_body="Body",
-        request_uri="http://localhost:8000/sendmail/", )
+        request_uri="http://localhost:8000/sendmail/",
+    )
 
     # THEN the recipient field should be a list with both recipients
     assert isinstance(request.recipients, list)
@@ -69,7 +72,8 @@ def test_request_submit():
         recipients="test_email@example.com",
         mail_title="Title",
         mail_body="Body",
-        request_uri="http://localhost:8000/sendmail/", )
+        request_uri="http://localhost:8000/sendmail/",
+    )
 
     # WHEN submitting the request
     response = request.submit()
