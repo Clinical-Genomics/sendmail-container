@@ -39,7 +39,7 @@ def test_request_multiple_recipients_in_list():
     assert isinstance(request.recipients, list)
 
 
-def test_request_multiple_recipients_in_strin():
+def test_request_multiple_recipients_in_string():
     # GIVEN a request with multiple recipients
     recipients: str = "test_email@example.com,second_email@example.com"
 
