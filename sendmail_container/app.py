@@ -7,7 +7,6 @@ from typing import List, Optional
 from fastapi import FastAPI, File, Form, HTTPException, Response, UploadFile
 from pydantic import NameEmail
 from pydantic_settings import BaseSettings
-
 from starlette.responses import PlainTextResponse
 
 
@@ -35,7 +34,7 @@ def sendmail(
     recipients: List[NameEmail] = Form(...),
     mail_title: Optional[str] = Form("(Empty Subject)"),
     mail_body: Optional[str] = Form(None),
-    attachments: Optional[List[UploadFile]] = File(None),
+    attachments: List[UploadFile] = File(None),
 ):
     try:
         with SMTP(envconfig.email_host_uri) as server:
