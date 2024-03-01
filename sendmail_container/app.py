@@ -16,7 +16,7 @@ from fastapi.responses import HTMLResponse
 
 class EnvConfig(BaseSettings):
     email_host: str = "localhost"
-    email_host_uri: str = "127.0.0.1:25"
+    email_host_uri: str = "127.0.0.1"
 
     class Config:
         env_file = ".env"
@@ -33,12 +33,12 @@ def inform_error(request, exc):
 
 @app.post("/sendmail/")
 def sendmail(
-    attachments: list[UploadFile],
     sender_prefix: Optional[str] = Form("maildaemon"),
     email_server_alias: Optional[str] = Form(envconfig.email_host),
     recipients: List[NameEmail] = Form(...),
     mail_title: Optional[str] = Form("(Empty Subject)"),
     mail_body: Optional[str] = Form(None),
+    attachments: List[UploadFile] = File(None),
 
 ):
     try:
