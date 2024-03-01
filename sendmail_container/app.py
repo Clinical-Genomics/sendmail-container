@@ -4,7 +4,6 @@ from email.mime.text import MIMEText
 from smtplib import SMTP
 from typing import List, Optional
 
-import uvicorn
 from fastapi import FastAPI, File, Form, HTTPException, Response, UploadFile
 from pydantic import NameEmail
 from pydantic_settings import BaseSettings
